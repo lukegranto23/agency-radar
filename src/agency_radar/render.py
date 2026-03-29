@@ -6,12 +6,9 @@ from pathlib import Path
 
 from .analysis import ReportSummary, ScoredAward
 from .config import Profile
+from .public_config import CONTACT_EMAIL, CONTACT_URL, STRIPE_STARTER_URL
 from .usaspending import Award
 
-
-CONTACT_EMAIL = "lukegranto04@gmail.com"
-CONTACT_URL = "mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief"
-PAYMENT_LINK = "https://buy.stripe.com/4gM5kFdl0069gpg20Ve7m00"
 
 
 def money(value: float) -> str:
@@ -219,7 +216,7 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
       <p class="muted">Email the agencies, competitors, or NAICS codes you care about, or start directly with the starter plan checkout.</p>
       <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
         <a class="cta" href="{CONTACT_URL}">Email for a custom brief</a>
-        <a class="cta secondary" href="{PAYMENT_LINK}">Start Starter plan</a>
+        <a class="cta secondary" href="{STRIPE_STARTER_URL}">Start Starter plan</a>
       </div>
       <p class="muted">Private contact: {CONTACT_EMAIL}</p>
     </section>

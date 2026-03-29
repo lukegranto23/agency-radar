@@ -8,6 +8,7 @@ from pathlib import Path
 from .analysis import ReportSummary, summarize_awards
 from .config import DEFAULT_CONFIG_PATH, Profile, load_profile, load_profiles, to_jsonable_profile
 from .outbound import DraftEmail, append_send_log, filter_contacts, load_contacts, load_sent_keys, read_secret, send_via_resend, send_via_smtp, split_subject_body
+from .public_config import CONTACT_URL, PUBLIC_SITE_URL, STRIPE_STARTER_URL
 from .prospects import rank_prospects, render_prospects_html, render_prospects_markdown, slugify, write_prospects_csv, write_prospects_json
 from .render import load_awards_csv, render_html, render_markdown, write_awards_csv
 from .sales import PitchContext, render_followup_email, render_outreach_email
@@ -22,8 +23,6 @@ DOCS_REPORTS_DIR = DOCS_DIR / "reports"
 DOCS_DATA_DIR = DOCS_DIR / "data"
 DEFAULT_CONTACTS_PATH = ROOT / "data" / "initial_outreach_contacts.csv"
 DEFAULT_OUTREACH_LOG = ROOT / "data" / "outreach_log.csv"
-DEFAULT_MAILTO_URL = "mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief"
-DEFAULT_PAYMENT_LINK = "https://buy.stripe.com/4gM5kFdl0069gpg20Ve7m00"
 
 
 @dataclass(frozen=True)
@@ -197,9 +196,9 @@ def _build_drafts_from_contacts(
     sender_name: str,
     segment: str | None = None,
     limit: int | None = None,
-    sample_report_base_url: str = "https://lukegranto23.github.io/agency-radar/reports",
-    checkout_url: str = DEFAULT_PAYMENT_LINK,
-    contact_url: str = DEFAULT_MAILTO_URL,
+    sample_report_base_url: str = f"{PUBLIC_SITE_URL}/reports",
+    checkout_url: str = STRIPE_STARTER_URL,
+    contact_url: str = CONTACT_URL,
 ) -> list[DraftEmail]:
     contacts = filter_contacts(load_contacts(contacts_path), segment=segment, limit=limit)
     drafts = []
