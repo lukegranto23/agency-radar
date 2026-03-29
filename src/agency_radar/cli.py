@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .analysis import ReportSummary, summarize_awards
 from .config import DEFAULT_CONFIG_PATH, Profile, load_profile, load_profiles, to_jsonable_profile
+from .outbound import DraftEmail, append_send_log, filter_contacts, load_contacts, load_sent_keys, send_via_resend, send_via_smtp, split_subject_body
 from .prospects import rank_prospects, render_prospects_html, render_prospects_markdown, slugify, write_prospects_csv, write_prospects_json
 from .render import load_awards_csv, render_html, render_markdown, write_awards_csv
 from .sales import PitchContext, render_followup_email, render_outreach_email
@@ -19,6 +20,8 @@ REPORTS_DIR = ROOT / "reports"
 DOCS_DIR = ROOT / "docs"
 DOCS_REPORTS_DIR = DOCS_DIR / "reports"
 DOCS_DATA_DIR = DOCS_DIR / "data"
+DEFAULT_CONTACTS_PATH = ROOT / "data" / "initial_outreach_contacts.csv"
+DEFAULT_OUTREACH_LOG = ROOT / "data" / "outreach_log.csv"
 
 
 @dataclass(frozen=True)
@@ -187,6 +190,105 @@ def build_site_catalog() -> dict[str, str]:
     }
 
 
+def _build_drafts_from_contacts(
+    contacts_path: Path,
+    sender_name: str,
+    segment: str | None = None,
+    limit: int | None = None,
+    sample_report_base_url: str = "https://lukegranto23.github.io/agency-radar/reports",
+) -> list[DraftEmail]:
+    contacts = filter_contacts(load_contacts(contacts_path), segment=segment, limit=limit)
+    drafts = []
+    for contact in contacts:
+        profile = load_profile(contact.segment)
+        _awards, summary = _fetch_profile_snapshot(profile)
+        content = render_outreach_email(
+            profile,
+            summary,
+            PitchContext(
+                company_name=contact.company_name,
+                first_name=contact.named_contact.split()[0] if contact.named_contact else "there",
+                sender_name=sender_name,
+                rationale=contact.why_this_company,
+                sample_report_url=f"{sample_report_base_url}/{profile.slug}.html",
+            ),
+        )
+        subject, body = split_subject_body(content)
+        drafts.append(
+            DraftEmail(
+                company_name=contact.company_name,
+                email=contact.general_email,
+                subject=subject,
+                body=body,
+                segment=contact.segment,
+            )
+        )
+    return drafts
+
+
+def send_outreach_smtp(
+    contacts_path: Path,
+    sender_name: str,
+    from_email: str,
+    smtp_host: str,
+    smtp_port: int,
+    smtp_username: str,
+    smtp_password: str,
+    reply_to: str | None = None,
+    segment: str | None = None,
+    limit: int | None = None,
+) -> list[dict[str, str]]:
+    sent_keys = load_sent_keys(DEFAULT_OUTREACH_LOG)
+    drafts = _build_drafts_from_contacts(contacts_path, sender_name, segment=segment, limit=limit)
+    results = []
+    for draft in drafts:
+        if (draft.company_name, draft.email) in sent_keys:
+            results.append({"company_name": draft.company_name, "email": draft.email, "status": "skipped", "detail": "already sent"})
+            continue
+        outcome = send_via_smtp(
+            draft,
+            from_email=from_email,
+            smtp_host=smtp_host,
+            smtp_port=smtp_port,
+            smtp_username=smtp_username,
+            smtp_password=smtp_password,
+            reply_to=reply_to,
+        )
+        append_send_log(DEFAULT_OUTREACH_LOG, [outcome])
+        results.append({"company_name": outcome.company_name, "email": outcome.email, "status": outcome.status, "detail": outcome.detail})
+    return results
+
+
+def send_outreach_resend(
+    contacts_path: Path,
+    sender_name: str,
+    from_email: str,
+    api_key: str,
+    reply_to: str | None = None,
+    segment: str | None = None,
+    limit: int | None = None,
+) -> list[dict[str, str]]:
+    sent_keys = load_sent_keys(DEFAULT_OUTREACH_LOG)
+    drafts = _build_drafts_from_contacts(contacts_path, sender_name, segment=segment, limit=limit)
+    results = []
+    batch_results = []
+    for draft in drafts:
+        if (draft.company_name, draft.email) in sent_keys:
+            results.append({"company_name": draft.company_name, "email": draft.email, "status": "skipped", "detail": "already sent"})
+            continue
+        outcome = send_via_resend(
+            draft,
+            api_key=api_key,
+            from_email=from_email,
+            reply_to=reply_to,
+        )
+        batch_results.append(outcome)
+        results.append({"company_name": outcome.company_name, "email": outcome.email, "status": outcome.status, "detail": outcome.detail})
+    if batch_results:
+        append_send_log(DEFAULT_OUTREACH_LOG, batch_results)
+    return results
+
+
 def list_profiles() -> int:
     profiles = load_profiles(DEFAULT_CONFIG_PATH)
     for slug, profile in sorted(profiles.items()):
@@ -223,6 +325,27 @@ def main() -> int:
     pitch_batch_parser.add_argument("--top", type=int, default=8, help="Number of ranked prospects to generate")
     pitch_batch_parser.add_argument("--sender-name", default="Luke", help="Sender signature name")
     pitch_batch_parser.add_argument("--sample-report-url", default="sample-report.html", help="URL to the public sample report")
+
+    smtp_parser = subparsers.add_parser("send-smtp", help="Send outbound emails from the contact list using SMTP")
+    smtp_parser.add_argument("--contacts", default=str(DEFAULT_CONTACTS_PATH), help="CSV file of contacts")
+    smtp_parser.add_argument("--sender-name", default="Luke", help="Sender signature name")
+    smtp_parser.add_argument("--from-email", required=True, help="Visible from email")
+    smtp_parser.add_argument("--smtp-host", required=True, help="SMTP host")
+    smtp_parser.add_argument("--smtp-port", type=int, default=465, help="SMTP SSL port")
+    smtp_parser.add_argument("--smtp-username", required=True, help="SMTP username")
+    smtp_parser.add_argument("--smtp-password", required=True, help="SMTP password")
+    smtp_parser.add_argument("--reply-to", help="Optional reply-to email")
+    smtp_parser.add_argument("--segment", help="Optional segment slug filter")
+    smtp_parser.add_argument("--limit", type=int, help="Optional send limit")
+
+    resend_parser = subparsers.add_parser("send-resend", help="Send outbound emails from the contact list using Resend")
+    resend_parser.add_argument("--contacts", default=str(DEFAULT_CONTACTS_PATH), help="CSV file of contacts")
+    resend_parser.add_argument("--sender-name", default="Luke", help="Sender signature name")
+    resend_parser.add_argument("--from-email", required=True, help="Verified sending address")
+    resend_parser.add_argument("--api-key", required=True, help="Resend API key")
+    resend_parser.add_argument("--reply-to", help="Optional reply-to email")
+    resend_parser.add_argument("--segment", help="Optional segment slug filter")
+    resend_parser.add_argument("--limit", type=int, help="Optional send limit")
 
     args = parser.parse_args()
     if args.command == "list-profiles":
@@ -277,6 +400,35 @@ def main() -> int:
         )
         for label, path in outputs.items():
             print(f"{label}: {path}")
+        return 0
+    if args.command == "send-smtp":
+        results = send_outreach_smtp(
+            Path(args.contacts),
+            sender_name=args.sender_name,
+            from_email=args.from_email,
+            smtp_host=args.smtp_host,
+            smtp_port=args.smtp_port,
+            smtp_username=args.smtp_username,
+            smtp_password=args.smtp_password,
+            reply_to=args.reply_to,
+            segment=args.segment,
+            limit=args.limit,
+        )
+        for item in results:
+            print(f"{item['status']}: {item['company_name']} <{item['email']}> | {item['detail']}")
+        return 0
+    if args.command == "send-resend":
+        results = send_outreach_resend(
+            Path(args.contacts),
+            sender_name=args.sender_name,
+            from_email=args.from_email,
+            api_key=args.api_key,
+            reply_to=args.reply_to,
+            segment=args.segment,
+            limit=args.limit,
+        )
+        for item in results:
+            print(f"{item['status']}: {item['company_name']} <{item['email']}> | {item['detail']}")
         return 0
     return 1
 
