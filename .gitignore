@@ -1,3 +1,7 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+.env
+.env.*
+data/outreach_log.csv
+data/private/

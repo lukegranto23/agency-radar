@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import smtplib
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from email.utils import formataddr
 from pathlib import Path
 from typing import Iterable
 from urllib.error import HTTPError
@@ -110,9 +112,19 @@ def append_send_log(path: Path, results: list[SendResult]) -> None:
             writer.writerow([sent_at, result.mode, result.company_name, result.email, result.segment, result.status, result.detail])
 
 
+def read_secret(explicit_value: str | None, env_name: str) -> str:
+    if explicit_value:
+        return explicit_value
+    try:
+        return os.environ[env_name]
+    except KeyError as exc:
+        raise SystemExit(f"Missing secret. Provide the flag or set {env_name}.") from exc
+
+
 def send_via_smtp(
     draft: DraftEmail,
     from_email: str,
+    display_name: str,
     smtp_host: str,
     smtp_port: int,
     smtp_username: str,
@@ -120,7 +132,7 @@ def send_via_smtp(
     reply_to: str | None = None,
 ) -> SendResult:
     message = EmailMessage()
-    message["From"] = from_email
+    message["From"] = formataddr((display_name, from_email))
     message["To"] = draft.email
     message["Subject"] = draft.subject
     if reply_to:
@@ -136,10 +148,11 @@ def send_via_resend(
     draft: DraftEmail,
     api_key: str,
     from_email: str,
+    display_name: str,
     reply_to: str | None = None,
 ) -> SendResult:
     payload = {
-        "from": from_email,
+        "from": formataddr((display_name, from_email)),
         "to": [draft.email],
         "subject": draft.subject,
         "text": draft.body,
@@ -162,4 +175,3 @@ def send_via_resend(
     except HTTPError as exc:
         detail = exc.read().decode("utf-8")
         return SendResult(draft.company_name, draft.email, draft.segment, "resend", "failed", detail[:300])
-

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .analysis import ReportSummary, summarize_awards
 from .config import DEFAULT_CONFIG_PATH, Profile, load_profile, load_profiles, to_jsonable_profile
-from .outbound import DraftEmail, append_send_log, filter_contacts, load_contacts, load_sent_keys, send_via_resend, send_via_smtp, split_subject_body
+from .outbound import DraftEmail, append_send_log, filter_contacts, load_contacts, load_sent_keys, read_secret, send_via_resend, send_via_smtp, split_subject_body
 from .prospects import rank_prospects, render_prospects_html, render_prospects_markdown, slugify, write_prospects_csv, write_prospects_json
 from .render import load_awards_csv, render_html, render_markdown, write_awards_csv
 from .sales import PitchContext, render_followup_email, render_outreach_email
@@ -22,6 +22,8 @@ DOCS_REPORTS_DIR = DOCS_DIR / "reports"
 DOCS_DATA_DIR = DOCS_DIR / "data"
 DEFAULT_CONTACTS_PATH = ROOT / "data" / "initial_outreach_contacts.csv"
 DEFAULT_OUTREACH_LOG = ROOT / "data" / "outreach_log.csv"
+DEFAULT_MAILTO_URL = "mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief"
+DEFAULT_PAYMENT_LINK = "https://buy.stripe.com/4gM5kFdl0069gpg20Ve7m00"
 
 
 @dataclass(frozen=True)
@@ -196,6 +198,8 @@ def _build_drafts_from_contacts(
     segment: str | None = None,
     limit: int | None = None,
     sample_report_base_url: str = "https://lukegranto23.github.io/agency-radar/reports",
+    checkout_url: str = DEFAULT_PAYMENT_LINK,
+    contact_url: str = DEFAULT_MAILTO_URL,
 ) -> list[DraftEmail]:
     contacts = filter_contacts(load_contacts(contacts_path), segment=segment, limit=limit)
     drafts = []
@@ -211,6 +215,8 @@ def _build_drafts_from_contacts(
                 sender_name=sender_name,
                 rationale=contact.why_this_company,
                 sample_report_url=f"{sample_report_base_url}/{profile.slug}.html",
+                checkout_url=checkout_url,
+                contact_url=contact_url,
             ),
         )
         subject, body = split_subject_body(content)
@@ -229,6 +235,7 @@ def _build_drafts_from_contacts(
 def send_outreach_smtp(
     contacts_path: Path,
     sender_name: str,
+    display_name: str,
     from_email: str,
     smtp_host: str,
     smtp_port: int,
@@ -248,6 +255,7 @@ def send_outreach_smtp(
         outcome = send_via_smtp(
             draft,
             from_email=from_email,
+            display_name=display_name,
             smtp_host=smtp_host,
             smtp_port=smtp_port,
             smtp_username=smtp_username,
@@ -262,6 +270,7 @@ def send_outreach_smtp(
 def send_outreach_resend(
     contacts_path: Path,
     sender_name: str,
+    display_name: str,
     from_email: str,
     api_key: str,
     reply_to: str | None = None,
@@ -280,6 +289,7 @@ def send_outreach_resend(
             draft,
             api_key=api_key,
             from_email=from_email,
+            display_name=display_name,
             reply_to=reply_to,
         )
         batch_results.append(outcome)
@@ -329,11 +339,12 @@ def main() -> int:
     smtp_parser = subparsers.add_parser("send-smtp", help="Send outbound emails from the contact list using SMTP")
     smtp_parser.add_argument("--contacts", default=str(DEFAULT_CONTACTS_PATH), help="CSV file of contacts")
     smtp_parser.add_argument("--sender-name", default="Luke", help="Sender signature name")
+    smtp_parser.add_argument("--display-name", default="Agency Radar", help="Visible display name in the From header")
     smtp_parser.add_argument("--from-email", required=True, help="Visible from email")
     smtp_parser.add_argument("--smtp-host", required=True, help="SMTP host")
     smtp_parser.add_argument("--smtp-port", type=int, default=465, help="SMTP SSL port")
     smtp_parser.add_argument("--smtp-username", required=True, help="SMTP username")
-    smtp_parser.add_argument("--smtp-password", required=True, help="SMTP password")
+    smtp_parser.add_argument("--smtp-password", help="SMTP password; prefer env AGENCY_RADAR_SMTP_PASSWORD")
     smtp_parser.add_argument("--reply-to", help="Optional reply-to email")
     smtp_parser.add_argument("--segment", help="Optional segment slug filter")
     smtp_parser.add_argument("--limit", type=int, help="Optional send limit")
@@ -341,8 +352,9 @@ def main() -> int:
     resend_parser = subparsers.add_parser("send-resend", help="Send outbound emails from the contact list using Resend")
     resend_parser.add_argument("--contacts", default=str(DEFAULT_CONTACTS_PATH), help="CSV file of contacts")
     resend_parser.add_argument("--sender-name", default="Luke", help="Sender signature name")
+    resend_parser.add_argument("--display-name", default="Agency Radar", help="Visible display name in the From header")
     resend_parser.add_argument("--from-email", required=True, help="Verified sending address")
-    resend_parser.add_argument("--api-key", required=True, help="Resend API key")
+    resend_parser.add_argument("--api-key", help="Resend API key; prefer env AGENCY_RADAR_RESEND_API_KEY")
     resend_parser.add_argument("--reply-to", help="Optional reply-to email")
     resend_parser.add_argument("--segment", help="Optional segment slug filter")
     resend_parser.add_argument("--limit", type=int, help="Optional send limit")
@@ -405,11 +417,12 @@ def main() -> int:
         results = send_outreach_smtp(
             Path(args.contacts),
             sender_name=args.sender_name,
+            display_name=args.display_name,
             from_email=args.from_email,
             smtp_host=args.smtp_host,
             smtp_port=args.smtp_port,
             smtp_username=args.smtp_username,
-            smtp_password=args.smtp_password,
+            smtp_password=read_secret(args.smtp_password, "AGENCY_RADAR_SMTP_PASSWORD"),
             reply_to=args.reply_to,
             segment=args.segment,
             limit=args.limit,
@@ -421,8 +434,9 @@ def main() -> int:
         results = send_outreach_resend(
             Path(args.contacts),
             sender_name=args.sender_name,
+            display_name=args.display_name,
             from_email=args.from_email,
-            api_key=args.api_key,
+            api_key=read_secret(args.api_key, "AGENCY_RADAR_RESEND_API_KEY"),
             reply_to=args.reply_to,
             segment=args.segment,
             limit=args.limit,

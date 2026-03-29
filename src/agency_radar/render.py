@@ -9,7 +9,9 @@ from .config import Profile
 from .usaspending import Award
 
 
-REQUEST_SAMPLE_URL = "https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml"
+CONTACT_EMAIL = "lukegranto04@gmail.com"
+CONTACT_URL = "mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief"
+PAYMENT_LINK = "https://buy.stripe.com/4gM5kFdl0069gpg20Ve7m00"
 
 
 def money(value: float) -> str:
@@ -126,6 +128,11 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
       text-decoration: none;
       font-weight: 700;
     }}
+    .cta.secondary {{
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }}
     @media (max-width: 900px) {{
       .stats, .grid {{ grid-template-columns: 1fr; }}
     }}
@@ -209,8 +216,12 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
 
     <section class="panel" style="margin-bottom: 2rem;">
       <h2>Need this for your niche?</h2>
-      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
-      <a class="cta" href="{REQUEST_SAMPLE_URL}">Request a custom brief</a>
+      <p class="muted">Email the agencies, competitors, or NAICS codes you care about, or start directly with the starter plan checkout.</p>
+      <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+        <a class="cta" href="{CONTACT_URL}">Email for a custom brief</a>
+        <a class="cta secondary" href="{PAYMENT_LINK}">Start Starter plan</a>
+      </div>
+      <p class="muted">Private contact: {CONTACT_EMAIL}</p>
     </section>
   </main>
 </body>

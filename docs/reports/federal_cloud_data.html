@@ -52,6 +52,11 @@
       text-decoration: none;
       font-weight: 700;
     }
+    .cta.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
     @media (max-width: 900px) {
       .stats, .grid { grid-template-columns: 1fr; }
     }
@@ -194,8 +199,12 @@
 
     <section class="panel" style="margin-bottom: 2rem;">
       <h2>Need this for your niche?</h2>
-      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
-      <a class="cta" href="https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml">Request a custom brief</a>
+      <p class="muted">Email the agencies, competitors, or NAICS codes you care about, or start directly with the starter plan checkout.</p>
+      <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+        <a class="cta" href="mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief">Email for a custom brief</a>
+        <a class="cta secondary" href="https://buy.stripe.com/4gM5kFdl0069gpg20Ve7m00">Start Starter plan</a>
+      </div>
+      <p class="muted">Private contact: lukegranto04@gmail.com</p>
     </section>
   </main>
 </body>

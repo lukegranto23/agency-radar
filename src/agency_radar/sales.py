@@ -13,6 +13,8 @@ class PitchContext:
     sender_name: str
     rationale: str = ""
     sample_report_url: str = "sample-report.html"
+    checkout_url: str = ""
+    contact_url: str = "mailto:lukegranto04@gmail.com?subject=Agency%20Radar%20custom%20brief"
 
 
 def render_outreach_email(profile: Profile, summary: ReportSummary, context: PitchContext) -> str:
@@ -55,6 +57,19 @@ def render_outreach_email(profile: Profile, summary: ReportSummary, context: Pit
         [
             f"If useful, I can send you the sample report and turn it into a recurring weekly brief for your niche: {context.sample_report_url}",
             "",
+        ]
+    )
+    if context.checkout_url:
+        lines.extend(
+            [
+                f"If you already know the fit is there, the starter checkout is here: {context.checkout_url}",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            f"Direct reply path: {context.contact_url}",
+            "",
             f"- {context.sender_name}",
         ]
     )
@@ -73,7 +88,19 @@ def render_followup_email(profile: Profile, summary: ReportSummary, context: Pit
         f"It currently shows {len(summary.expiring_awards)} awards expiring within {profile.expiring_within_days} days and {top_agency} as the heaviest spending agency in this slice.",
         "",
         f"If you want, I can send the sample report here: {context.sample_report_url}",
-        "",
-        f"- {context.sender_name}",
     ]
+    if context.checkout_url:
+        lines.extend(
+            [
+                f"If you want to start immediately, the starter checkout is here: {context.checkout_url}",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            f"Direct reply path: {context.contact_url}",
+            "",
+            f"- {context.sender_name}",
+        ]
+    )
     return "\n".join(lines) + "\n"
