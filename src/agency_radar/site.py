@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .analysis import ReportSummary
 from .config import Profile
-from .public_config import CONTACT_URL, STRIPE_STARTER_URL
+from .public_config import CONTACT_URL, STRIPE_BRIEF_URL, STRIPE_MINI_URL, STRIPE_STARTER_URL
 
 
 @dataclass(frozen=True)
@@ -105,7 +105,7 @@ def render_catalog_html(entries: list[PublishedReport]) -> str:
       <div class="eyebrow">Agency Radar catalog</div>
       <h1>Sellable procurement briefs across multiple federal niches.</h1>
       <p>Each report is generated from live USAspending data and packaged as a recurring brief rather than a dashboard subscription. This page is meant to make the product legible to buyers fast.</p>
-      <p><a class="cta" href="{STRIPE_STARTER_URL}">Start Starter plan</a> <a class="cta secondary" href="{CONTACT_URL}">Email for a custom brief</a></p>
+      <p><a class="cta" href="{STRIPE_MINI_URL}">Start with mini brief ($19)</a> <a class="cta secondary" href="{STRIPE_BRIEF_URL}">Buy full custom brief ($49)</a> <a class="cta secondary" href="{STRIPE_STARTER_URL}">Start Starter plan</a> <a class="cta secondary" href="{CONTACT_URL}">Email for a custom brief</a></p>
     </section>
     <section class="grid">
       {''.join(cards)}

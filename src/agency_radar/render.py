@@ -6,7 +6,7 @@ from pathlib import Path
 
 from .analysis import ReportSummary, ScoredAward
 from .config import Profile
-from .public_config import CONTACT_EMAIL, CONTACT_URL, STRIPE_STARTER_URL
+from .public_config import CONTACT_EMAIL, CONTACT_URL, STRIPE_BRIEF_URL, STRIPE_MINI_URL, STRIPE_STARTER_URL
 from .usaspending import Award
 
 
@@ -213,9 +213,11 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
 
     <section class="panel" style="margin-bottom: 2rem;">
       <h2>Need this for your niche?</h2>
-      <p class="muted">Email the agencies, competitors, or NAICS codes you care about, or start directly with the starter plan checkout.</p>
+      <p class="muted">Email the agencies, competitors, or NAICS codes you care about, start with a low-friction mini brief, or jump straight into the full custom brief or starter plan.</p>
       <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
         <a class="cta" href="{CONTACT_URL}">Email for a custom brief</a>
+        <a class="cta secondary" href="{STRIPE_MINI_URL}">Start with mini brief ($19)</a>
+        <a class="cta secondary" href="{STRIPE_BRIEF_URL}">Buy full custom brief ($49)</a>
         <a class="cta secondary" href="{STRIPE_STARTER_URL}">Start Starter plan</a>
       </div>
       <p class="muted">Private contact: {CONTACT_EMAIL}</p>

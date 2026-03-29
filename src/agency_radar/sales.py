@@ -63,7 +63,7 @@ def render_outreach_email(profile: Profile, summary: ReportSummary, context: Pit
     if context.checkout_url:
         lines.extend(
             [
-                f"If you already know the fit is there, the starter checkout is here: {context.checkout_url}",
+                f"If you want a low-friction start, you can order a one-time mini brief here: {context.checkout_url}",
                 "",
             ]
         )
@@ -94,7 +94,7 @@ def render_followup_email(profile: Profile, summary: ReportSummary, context: Pit
     if context.checkout_url:
         lines.extend(
             [
-                f"If you want to start immediately, the starter checkout is here: {context.checkout_url}",
+                f"If you want to start immediately with a one-time mini brief, the checkout is here: {context.checkout_url}",
                 "",
             ]
         )

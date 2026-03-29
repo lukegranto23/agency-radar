@@ -10,7 +10,7 @@ from .analysis import ReportSummary, summarize_awards
 from .billing import fetch_recent_checkout_sessions
 from .config import DEFAULT_CONFIG_PATH, Profile, load_profile, load_profiles, to_jsonable_profile
 from .outbound import DraftEmail, append_send_log, fetch_inbox_messages, filter_contacts, load_contacts, load_sent_keys, read_secret, send_via_resend, send_via_smtp, split_subject_body
-from .public_config import CONTACT_EMAIL, CONTACT_URL, PUBLIC_SITE_URL, STRIPE_STARTER_URL
+from .public_config import CONTACT_EMAIL, CONTACT_URL, PUBLIC_SITE_URL, STRIPE_BRIEF_URL, STRIPE_MINI_URL, STRIPE_STARTER_URL
 from .prospects import rank_prospects, render_prospects_html, render_prospects_markdown, slugify, write_prospects_csv, write_prospects_json
 from .render import load_awards_csv, render_html, render_markdown, write_awards_csv
 from .sales import PitchContext, render_followup_email, render_outreach_email
@@ -199,7 +199,7 @@ def _build_drafts_from_contacts(
     segment: str | None = None,
     limit: int | None = None,
     sample_report_base_url: str = f"{PUBLIC_SITE_URL}/reports",
-    checkout_url: str = STRIPE_STARTER_URL,
+    checkout_url: str = STRIPE_MINI_URL,
     contact_url: str = CONTACT_EMAIL,
 ) -> list[DraftEmail]:
     contacts = filter_contacts(load_contacts(contacts_path), segment=segment, limit=limit)
