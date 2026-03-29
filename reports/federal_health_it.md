@@ -7,7 +7,7 @@ A recurring brief for vendors and consultants tracking federal health systems, m
 - Award window count: 200
 - Award dollars in window: $84,842,799,258
 - Expiring within 180 days: 64
-- Newly observed in latest run: 15
+- Newly observed in latest run: 0
 
 ## Top agencies
 - General Services Administration: $21,967,561,097 across 47 awards

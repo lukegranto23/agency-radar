@@ -7,7 +7,7 @@ Signals for firms sitting between federal construction, facilities, and systems 
 - Award window count: 200
 - Award dollars in window: $104,402,694,351
 - Expiring within 180 days: 48
-- Newly observed in latest run: 15
+- Newly observed in latest run: 0
 
 ## Top agencies
 - Department of Homeland Security: $23,165,208,250 across 35 awards

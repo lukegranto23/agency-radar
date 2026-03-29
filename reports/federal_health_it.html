@@ -43,6 +43,15 @@
     th { color: var(--muted); font-weight: 600; }
     ul { margin: 0; padding-left: 1.1rem; }
     .muted { color: var(--muted); }
+    .cta {
+      display: inline-block;
+      padding: 0.9rem 1.15rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+    }
     @media (max-width: 900px) {
       .stats, .grid { grid-template-columns: 1fr; }
     }
@@ -135,21 +144,7 @@
         <h2>Newly observed awards</h2>
         <table>
           <thead><tr><th>Award ID</th><th>Recipient</th><th>Agency</th><th>Amount</th><th>Start</th><th>End</th></tr></thead>
-          <tbody><tr><td>70B02C26F00000035</td><td>ANDURIL INDUSTRIES, INC.</td><td>Department of Homeland Security</td><td>$362,974,500</td><td>2025-12-25</td><td>2026-12-24</td></tr>
-<tr><td>W9128Z26FA001</td><td>PALANTIR USG INC</td><td>Department of Defense</td><td>$252,458,698</td><td>2025-10-15</td><td>2029-05-31</td></tr>
-<tr><td>36C10B26F0287</td><td>THUNDERCAT TECHNOLOGY, LLC</td><td>Department of Veterans Affairs</td><td>$221,952,278</td><td>2025-10-01</td><td>2026-09-30</td></tr>
-<tr><td>HT003825F0007</td><td>LEIDOS, INC.</td><td>Department of Defense</td><td>$252,581,998</td><td>2025-07-29</td><td>2026-07-28</td></tr>
-<tr><td>2032H325F00032</td><td>LANCER INFORMATION SOLUTIONS, LLC</td><td>Department of the Treasury</td><td>$250,351,503</td><td>2025-03-01</td><td>2027-04-14</td></tr>
-<tr><td>75FCMC25FJ022</td><td>GENERAL DYNAMICS INFORMATION TECHNOLOGY, INC.</td><td>Department of Health and Human Services</td><td>$251,598,270</td><td>2025-02-20</td><td>2026-06-30</td></tr>
-<tr><td>91003125C0011</td><td>MAXIMUS FEDERAL SERVICES, INC.</td><td>Department of Education</td><td>$235,007,623</td><td>2025-02-01</td><td>2026-04-30</td></tr>
-<tr><td>70B04C24F00001129</td><td>CACI, INC. - FEDERAL</td><td>Department of Homeland Security</td><td>$468,874,248</td><td>2024-09-30</td><td>2026-09-29</td></tr>
-<tr><td>36C10B24N0063EHRM</td><td>ORACLE HEALTH GOVERNMENT SERVICES, INC.</td><td>Department of Veterans Affairs</td><td>$299,999,849</td><td>2024-09-30</td><td>2026-12-25</td></tr>
-<tr><td>36C10B24F0420</td><td>IT CONCEPTS, INC.</td><td>Department of Veterans Affairs</td><td>$237,081,504</td><td>2024-09-30</td><td>2026-09-29</td></tr>
-<tr><td>36C10B24F0365</td><td>SPREZZATURA MANAGEMENT CONSULTING, LLC</td><td>Department of Veterans Affairs</td><td>$337,260,907</td><td>2024-09-27</td><td>2027-01-25</td></tr>
-<tr><td>FA872624FB071</td><td>ACCENTURE FEDERAL SERVICES LLC</td><td>Department of Defense</td><td>$262,695,096</td><td>2024-09-11</td><td>2026-06-10</td></tr>
-<tr><td>36C10G24N0112</td><td>SOLDIERPOINT DIGITAL HEALTH, LLC</td><td>Department of Veterans Affairs</td><td>$234,219,526</td><td>2024-09-07</td><td>2026-09-06</td></tr>
-<tr><td>70B04C24F00000739</td><td>LEIDOS, INC.</td><td>Department of Homeland Security</td><td>$229,207,895</td><td>2024-09-03</td><td>2026-05-30</td></tr>
-<tr><td>36C10B24F0237</td><td>DELOITTE CONSULTING LLP</td><td>Department of Veterans Affairs</td><td>$336,139,608</td><td>2024-08-01</td><td>2027-03-04</td></tr></tbody>
+          <tbody><tr><td colspan='6'>No awards found for this profile.</td></tr></tbody>
         </table>
       </article>
       <article class="panel">
@@ -195,6 +190,12 @@
 <tr><td>70B04C24F00000739</td><td>LEIDOS, INC.</td><td>Department of Homeland Security</td><td>$229,207,895</td><td>2024-09-03</td><td>2026-05-30</td></tr>
 <tr><td>36C10B24F0237</td><td>DELOITTE CONSULTING LLP</td><td>Department of Veterans Affairs</td><td>$336,139,608</td><td>2024-08-01</td><td>2027-03-04</td></tr></tbody>
       </table>
+    </section>
+
+    <section class="panel" style="margin-bottom: 2rem;">
+      <h2>Need this for your niche?</h2>
+      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
+      <a class="cta" href="https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml">Request a custom brief</a>
     </section>
   </main>
 </body>

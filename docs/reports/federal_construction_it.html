@@ -43,6 +43,15 @@
     th { color: var(--muted); font-weight: 600; }
     ul { margin: 0; padding-left: 1.1rem; }
     .muted { color: var(--muted); }
+    .cta {
+      display: inline-block;
+      padding: 0.9rem 1.15rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+    }
     @media (max-width: 900px) {
       .stats, .grid { grid-template-columns: 1fr; }
     }
@@ -135,21 +144,7 @@
         <h2>Newly observed awards</h2>
         <table>
           <thead><tr><th>Award ID</th><th>Recipient</th><th>Agency</th><th>Amount</th><th>Start</th><th>End</th></tr></thead>
-          <tbody><tr><td>70B01C26F00000261</td><td>SPENCER CONSTRUCTION LLC</td><td>Department of Homeland Security</td><td>$1,145,001,057</td><td>2026-03-18</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000165</td><td>GRANITE CONSTRUCTION COMPANY</td><td>Department of Homeland Security</td><td>$512,334,000</td><td>2026-03-09</td><td>2027-06-22</td></tr>
-<tr><td>70B01C26F00000152</td><td>BARNARD CONSTRUCTION COMPANY, INCORPORATED</td><td>Department of Homeland Security</td><td>$1,025,996,158</td><td>2026-03-05</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000201</td><td>BARNARD CONSTRUCTION COMPANY, INCORPORATED</td><td>Department of Homeland Security</td><td>$960,423,540</td><td>2026-03-05</td><td>2027-05-26</td></tr>
-<tr><td>70B01C26F00000188</td><td>COCHRANE USA INC</td><td>Department of Homeland Security</td><td>$641,277,600</td><td>2026-03-05</td><td>2027-03-31</td></tr>
-<tr><td>70B01C26F00000141</td><td>BARNARD CONSTRUCTION COMPANY, INCORPORATED</td><td>Department of Homeland Security</td><td>$601,914,474</td><td>2026-03-05</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000138</td><td>SOUTHWEST VALLEY CONSTRUCTORS CO</td><td>Department of Homeland Security</td><td>$523,929,041</td><td>2026-03-05</td><td>2027-12-17</td></tr>
-<tr><td>70B01C26F00000207</td><td>SPENCER CONSTRUCTION LLC</td><td>Department of Homeland Security</td><td>$512,079,200</td><td>2026-03-05</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000148</td><td>SPENCER CONSTRUCTION LLC</td><td>Department of Homeland Security</td><td>$269,200,000</td><td>2026-03-05</td><td>2027-02-25</td></tr>
-<tr><td>70B01C26F00000169</td><td>FISHER SAND &amp; GRAVEL CO</td><td>Department of Homeland Security</td><td>$1,223,124,000</td><td>2026-02-13</td><td>2027-09-05</td></tr>
-<tr><td>70B01C26F00000117</td><td>BARNARD CONSTRUCTION COMPANY, INCORPORATED</td><td>Department of Homeland Security</td><td>$369,492,406</td><td>2026-01-27</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000118</td><td>SPENCER CONSTRUCTION LLC</td><td>Department of Homeland Security</td><td>$259,646,000</td><td>2026-01-27</td><td>2026-08-31</td></tr>
-<tr><td>70B01C26F00000067</td><td>FISHER SAND &amp; GRAVEL CO</td><td>Department of Homeland Security</td><td>$458,090,440</td><td>2026-01-13</td><td>2028-08-31</td></tr>
-<tr><td>70B01C26F00000073</td><td>FISHER SAND &amp; GRAVEL CO</td><td>Department of Homeland Security</td><td>$1,787,500,000</td><td>2026-01-07</td><td>2028-08-31</td></tr>
-<tr><td>70B02C26F00000035</td><td>ANDURIL INDUSTRIES, INC.</td><td>Department of Homeland Security</td><td>$362,974,500</td><td>2025-12-25</td><td>2026-12-24</td></tr></tbody>
+          <tbody><tr><td colspan='6'>No awards found for this profile.</td></tr></tbody>
         </table>
       </article>
       <article class="panel">
@@ -195,6 +190,12 @@
 <tr><td>70B01C26F00000073</td><td>FISHER SAND &amp; GRAVEL CO</td><td>Department of Homeland Security</td><td>$1,787,500,000</td><td>2026-01-07</td><td>2028-08-31</td></tr>
 <tr><td>70B02C26F00000035</td><td>ANDURIL INDUSTRIES, INC.</td><td>Department of Homeland Security</td><td>$362,974,500</td><td>2025-12-25</td><td>2026-12-24</td></tr></tbody>
       </table>
+    </section>
+
+    <section class="panel" style="margin-bottom: 2rem;">
+      <h2>Need this for your niche?</h2>
+      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
+      <a class="cta" href="https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml">Request a custom brief</a>
     </section>
   </main>
 </body>

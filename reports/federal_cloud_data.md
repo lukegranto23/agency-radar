@@ -7,7 +7,7 @@ Signals for firms chasing federal cloud, platform, data, and managed-services op
 - Award window count: 200
 - Award dollars in window: $86,077,152,879
 - Expiring within 180 days: 65
-- Newly observed in latest run: 15
+- Newly observed in latest run: 0
 
 ## Top agencies
 - General Services Administration: $21,772,008,630 across 46 awards

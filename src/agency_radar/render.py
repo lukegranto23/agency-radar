@@ -9,6 +9,9 @@ from .config import Profile
 from .usaspending import Award
 
 
+REQUEST_SAMPLE_URL = "https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml"
+
+
 def money(value: float) -> str:
     return f"${value:,.0f}"
 
@@ -114,6 +117,15 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
     th {{ color: var(--muted); font-weight: 600; }}
     ul {{ margin: 0; padding-left: 1.1rem; }}
     .muted {{ color: var(--muted); }}
+    .cta {{
+      display: inline-block;
+      padding: 0.9rem 1.15rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+    }}
     @media (max-width: 900px) {{
       .stats, .grid {{ grid-template-columns: 1fr; }}
     }}
@@ -193,6 +205,12 @@ def render_html(profile: Profile, summary: ReportSummary) -> str:
         <thead><tr><th>Award ID</th><th>Recipient</th><th>Agency</th><th>Amount</th><th>Start</th><th>End</th></tr></thead>
         <tbody>{award_table_rows(summary.recent_awards)}</tbody>
       </table>
+    </section>
+
+    <section class="panel" style="margin-bottom: 2rem;">
+      <h2>Need this for your niche?</h2>
+      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
+      <a class="cta" href="{REQUEST_SAMPLE_URL}">Request a custom brief</a>
     </section>
   </main>
 </body>

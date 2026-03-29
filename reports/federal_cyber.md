@@ -7,7 +7,7 @@ A tighter watchlist on cybersecurity-adjacent federal spending for vendors chasi
 - Award window count: 200
 - Award dollars in window: $80,693,323,108
 - Expiring within 180 days: 70
-- Newly observed in latest run: 15
+- Newly observed in latest run: 0
 
 ## Top agencies
 - General Services Administration: $22,141,535,232 across 48 awards

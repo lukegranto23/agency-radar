@@ -43,6 +43,15 @@
     th { color: var(--muted); font-weight: 600; }
     ul { margin: 0; padding-left: 1.1rem; }
     .muted { color: var(--muted); }
+    .cta {
+      display: inline-block;
+      padding: 0.9rem 1.15rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+    }
     @media (max-width: 900px) {
       .stats, .grid { grid-template-columns: 1fr; }
     }
@@ -181,6 +190,12 @@
 <tr><td>70B04C24F00000739</td><td>LEIDOS, INC.</td><td>Department of Homeland Security</td><td>$229,207,895</td><td>2024-09-03</td><td>2026-05-30</td></tr>
 <tr><td>36C10B24F0237</td><td>DELOITTE CONSULTING LLP</td><td>Department of Veterans Affairs</td><td>$336,139,608</td><td>2024-08-01</td><td>2027-03-04</td></tr></tbody>
       </table>
+    </section>
+
+    <section class="panel" style="margin-bottom: 2rem;">
+      <h2>Need this for your niche?</h2>
+      <p class="muted">Request a custom brief or recurring version of this report and include the agencies, competitors, or NAICS codes you care about.</p>
+      <a class="cta" href="https://github.com/lukegranto23/agency-radar/issues/new?template=sample-request.yml">Request a custom brief</a>
     </section>
   </main>
 </body>
