@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agency Radar Mini Brief</title>
+  <style>
+    :root {
+      --bg: #0c1216;
+      --panel: #151d23;
+      --line: rgba(255,255,255,0.08);
+      --text: #edf0ea;
+      --muted: #b8c0b6;
+      --accent: #78d8b2;
+      --accent-2: #f4c96d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(120,216,178,0.18), transparent 24%),
+        linear-gradient(180deg, #11161b, var(--bg));
+    }
+    .shell { width: min(900px, calc(100% - 2rem)); margin: 0 auto; padding: 3rem 0 4rem; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; }
+    .hero h1 { font-size: clamp(2.3rem, 6vw, 4.6rem); line-height: 0.96; margin: 0.4rem 0 1rem; }
+    .hero p, li, label, input, textarea, select { color: var(--muted); line-height: 1.7; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 1.2rem;
+      margin-top: 1rem;
+    }
+    .status {
+      display: none;
+      border: 1px solid rgba(244, 201, 109, 0.32);
+      background: rgba(244, 201, 109, 0.08);
+      color: var(--text);
+    }
+    .status.active { display: block; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.85rem; }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 0.8rem 0.9rem;
+      font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .small { font-size: 0.95rem; }
+    code {
+      background: rgba(255,255,255,0.06);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+    }
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">Agency Radar</div>
+      <h1>Mini Brief</h1>
+      <p>One narrow federal procurement brief for one agency, one competitor set, or one NAICS slice. Built as the fastest paid starting point before a bigger custom brief or subscription.</p>
+    </section>
+
+    <section id="paid-banner" class="card status">
+      <strong>Payment step completed.</strong>
+      <p class="small">Use the intake below so the brief can be scoped correctly. The cleaner the request, the faster the handoff.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>What You Get</h2>
+        <ul>
+          <li>One narrow cut of the federal spend data</li>
+          <li>Top agencies, incumbents, and expiring awards in that slice</li>
+          <li>Email delivery designed for fast fit testing</li>
+          <li>A clean handoff that can be upgraded into a broader watchlist later</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Good Requests</h2>
+        <ul>
+          <li><code>VA + Oracle Health competitors</code></li>
+          <li><code>HHS + CMS digital services NAICS slice</code></li>
+          <li><code>DHS cloud modernization incumbents</code></li>
+          <li><code>One agency + one competitor set + 180-day expiries</code></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Mini Brief Intake</h2>
+      <p class="small">This form builds a structured email. If your mail app does not open, copy the generated text and send it to <code>lukegranto04@gmail.com</code>.</p>
+      <form id="intake-form">
+        <input id="checkout-session" name="checkoutSessionId" type="hidden">
+        <div class="grid">
+          <div class="field">
+            <label for="buyer-name">Your name</label>
+            <input id="buyer-name" name="buyerName" placeholder="Alex Smith">
+          </div>
+          <div class="field">
+            <label for="buyer-email">Your email</label>
+            <input id="buyer-email" name="buyerEmail" placeholder="alex@company.com">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" placeholder="Acme Federal">
+          </div>
+          <div class="field">
+            <label for="focus-type">Brief type</label>
+            <select id="focus-type" name="focusType">
+              <option value="agency">Agency slice</option>
+              <option value="competitor">Competitor set</option>
+              <option value="naics">NAICS slice</option>
+              <option value="mixed">Mixed narrow brief</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="focus-target">Target focus</label>
+          <input id="focus-target" name="focusTarget" placeholder="VA Cerner / Oracle Health competitors">
+        </div>
+        <div class="grid">
+          <div class="field">
+            <label for="agencies">Agencies</label>
+            <input id="agencies" name="agencies" placeholder="VA, HHS, DHS">
+          </div>
+          <div class="field">
+            <label for="competitors">Competitors</label>
+            <input id="competitors" name="competitors" placeholder="Leidos, Accenture Federal Services">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="field">
+            <label for="naics">NAICS codes</label>
+            <input id="naics" name="naics" placeholder="541512, 541519">
+          </div>
+          <div class="field">
+            <label for="time-window">Time window</label>
+            <input id="time-window" name="timeWindow" placeholder="180-day expiries">
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" placeholder="What exactly do you want the brief to help with?"></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn" type="submit">Open Intake Email</button>
+          <a class="btn secondary" href="https://buy.stripe.com/fZu5kFcgWaKN0qi7lfe7m05">Buy Mini Brief</a>
+          <a class="btn secondary" href="pricing.html">View Pricing</a>
+        </div>
+      </form>
+      <p id="fallback" class="small"></p>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const checkoutSessionId = params.get("session_id") || "";
+    if (params.get("paid") === "1") {
+      document.getElementById("paid-banner").classList.add("active");
+    }
+    if (checkoutSessionId) {
+      document.getElementById("checkout-session").value = checkoutSessionId;
+    }
+
+    const form = document.getElementById("intake-form");
+    const fallback = document.getElementById("fallback");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const data = new FormData(form);
+      const lines = [
+        "Agency Radar Mini Brief Intake",
+        "",
+        "Buyer Name: " + (data.get("buyerName") || ""),
+        "Buyer Email: " + (data.get("buyerEmail") || ""),
+        "Company: " + (data.get("company") || ""),
+        "Checkout Session: " + (data.get("checkoutSessionId") || ""),
+        "Brief Type: " + (data.get("focusType") || ""),
+        "Target Focus: " + (data.get("focusTarget") || ""),
+        "Agencies: " + (data.get("agencies") || ""),
+        "Competitors: " + (data.get("competitors") || ""),
+        "NAICS: " + (data.get("naics") || ""),
+        "Time Window: " + (data.get("timeWindow") || ""),
+        "Notes: " + (data.get("notes") || ""),
+      ];
+      const subject = encodeURIComponent("Agency Radar Mini Brief Intake");
+      const body = encodeURIComponent(lines.join("\n"));
+      const href = "mailto:lukegranto04@gmail.com?subject=" + subject + "&body=" + body;
+      fallback.textContent = lines.join(" | ");
+      window.location.href = href;
+    });
+  </script>
+</body>
+</html>
