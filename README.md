@@ -107,7 +107,9 @@ The fastest real monetization path is:
 - launch blockers and minimal identity requirements in [`ops/launch-blockers.md`](ops/launch-blockers.md)
 - outreach templates in [`templates/`](templates/)
 - generated prospect sheets in [`reports/`](reports/)
-- first-pass official contact surfaces in [`data/initial_outreach_contacts.csv`](data/initial_outreach_contacts.csv)
+- public sample contacts in [`data/sample_contacts.csv`](data/sample_contacts.csv)
+
+Real outreach lists should live under `data/private/`, which is gitignored.
 
 ## Honest Constraint
 

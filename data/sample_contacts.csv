@@ -1,0 +1,3 @@
+company_name,segment,why_this_company,website,contact_surface,general_email,phone,named_contact,named_role,source_url
+Example Federal IT Vendor,federal_it,"Replace this row with a real buyer in your private contact list.",https://example.com,https://example.com/contact,hello@example.com,555-0100,Alex Growth,VP Growth,https://example.com/about
+Example Federal Health Vendor,federal_health_it,"Replace this row with a real buyer in your private contact list.",https://example-health.com,https://example-health.com/contact,team@example-health.com,555-0101,Jamie Capture,Director of BD,https://example-health.com/about

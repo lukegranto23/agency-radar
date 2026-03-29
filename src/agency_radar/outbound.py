@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import csv
 import json
+import imaplib
 import os
 import smtplib
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
+from email import message_from_bytes
 from email.message import EmailMessage
 from email.utils import formataddr
 from pathlib import Path
@@ -43,6 +45,14 @@ class SendResult:
     mode: str
     status: str
     detail: str
+
+
+@dataclass(frozen=True)
+class InboxMessage:
+    from_header: str
+    to_header: str
+    subject: str
+    date_header: str
 
 
 def load_contacts(path: Path) -> list[Contact]:
@@ -119,6 +129,48 @@ def read_secret(explicit_value: str | None, env_name: str) -> str:
         return os.environ[env_name]
     except KeyError as exc:
         raise SystemExit(f"Missing secret. Provide the flag or set {env_name}.") from exc
+
+
+def fetch_inbox_messages(
+    username: str,
+    password: str,
+    mailbox: str = "INBOX",
+    unseen_only: bool = True,
+    since_days: int = 2,
+    limit: int = 20,
+) -> list[InboxMessage]:
+    since_date = (date.today() - timedelta(days=since_days)).strftime("%d-%b-%Y")
+    search_terms = []
+    if unseen_only:
+        search_terms.append("UNSEEN")
+    search_terms.extend(["SINCE", since_date])
+
+    client = imaplib.IMAP4_SSL("imap.gmail.com")
+    client.login(username, password)
+    try:
+        client.select(mailbox)
+        status, data = client.search(None, *search_terms)
+        if status != "OK":
+            return []
+        ids = data[0].split()[-limit:]
+        messages = []
+        for msg_id in ids:
+            status, msg_data = client.fetch(msg_id, "(BODY.PEEK[HEADER.FIELDS (FROM TO SUBJECT DATE)])")
+            if status != "OK" or not msg_data or not msg_data[0]:
+                continue
+            header_bytes = msg_data[0][1]
+            msg = message_from_bytes(header_bytes)
+            messages.append(
+                InboxMessage(
+                    from_header=msg.get("From", ""),
+                    to_header=msg.get("To", ""),
+                    subject=msg.get("Subject", ""),
+                    date_header=msg.get("Date", ""),
+                )
+            )
+        return messages
+    finally:
+        client.logout()
 
 
 def send_via_smtp(

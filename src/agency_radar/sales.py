@@ -18,14 +18,15 @@ class PitchContext:
 
 
 def render_outreach_email(profile: Profile, summary: ReportSummary, context: PitchContext) -> str:
+    offer_name = profile.name.replace(" Radar", "")
     top_agency = summary.top_agencies[0].name if summary.top_agencies else "federal buyers"
     top_recompete = summary.top_expiring_opportunities[0].award if summary.top_expiring_opportunities else None
     lines = [
-        f"Subject: A narrow {profile.name.lower()} brief for {context.company_name}",
+        f"Subject: A narrow {offer_name.lower()} brief for {context.company_name}",
         "",
         f"{context.first_name},",
         "",
-        f"I built a narrow procurement-intelligence brief for firms chasing {profile.name.lower()}.",
+        f"I built a narrow procurement-intelligence brief for firms chasing {offer_name.lower()} work.",
         "",
     ]
     if context.rationale:
@@ -55,7 +56,7 @@ def render_outreach_email(profile: Profile, summary: ReportSummary, context: Pit
         )
     lines.extend(
         [
-            f"If useful, I can send you the sample report and turn it into a recurring weekly brief for your niche: {context.sample_report_url}",
+            f"If useful, I can send you the sample report and turn it into a recurring weekly brief or custom watchlist for your niche: {context.sample_report_url}",
             "",
         ]
     )
@@ -77,17 +78,18 @@ def render_outreach_email(profile: Profile, summary: ReportSummary, context: Pit
 
 
 def render_followup_email(profile: Profile, summary: ReportSummary, context: PitchContext) -> str:
+    offer_name = profile.name.replace(" Radar", "")
     top_agency = summary.top_agencies[0].name if summary.top_agencies else "federal buyers"
     lines = [
-        f"Subject: Re: {profile.name} brief for {context.company_name}",
+        f"Subject: Re: {offer_name} brief for {context.company_name}",
         "",
         f"{context.first_name},",
         "",
-        f"Following up on the {profile.name.lower()} brief I mentioned.",
+        f"Following up on the {offer_name.lower()} brief I mentioned.",
         "",
         f"It currently shows {len(summary.expiring_awards)} awards expiring within {profile.expiring_within_days} days and {top_agency} as the heaviest spending agency in this slice.",
         "",
-        f"If you want, I can send the sample report here: {context.sample_report_url}",
+        f"If you want, I can send the sample report or set up a custom watchlist here: {context.sample_report_url}",
     ]
     if context.checkout_url:
         lines.extend(

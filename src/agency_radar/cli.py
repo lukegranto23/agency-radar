@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 
 from .analysis import ReportSummary, summarize_awards
+from .billing import fetch_recent_checkout_sessions
 from .config import DEFAULT_CONFIG_PATH, Profile, load_profile, load_profiles, to_jsonable_profile
-from .outbound import DraftEmail, append_send_log, filter_contacts, load_contacts, load_sent_keys, read_secret, send_via_resend, send_via_smtp, split_subject_body
-from .public_config import CONTACT_URL, PUBLIC_SITE_URL, STRIPE_STARTER_URL
+from .outbound import DraftEmail, append_send_log, fetch_inbox_messages, filter_contacts, load_contacts, load_sent_keys, read_secret, send_via_resend, send_via_smtp, split_subject_body
+from .public_config import CONTACT_EMAIL, CONTACT_URL, PUBLIC_SITE_URL, STRIPE_STARTER_URL
 from .prospects import rank_prospects, render_prospects_html, render_prospects_markdown, slugify, write_prospects_csv, write_prospects_json
 from .render import load_awards_csv, render_html, render_markdown, write_awards_csv
 from .sales import PitchContext, render_followup_email, render_outreach_email
@@ -21,7 +23,7 @@ REPORTS_DIR = ROOT / "reports"
 DOCS_DIR = ROOT / "docs"
 DOCS_REPORTS_DIR = DOCS_DIR / "reports"
 DOCS_DATA_DIR = DOCS_DIR / "data"
-DEFAULT_CONTACTS_PATH = ROOT / "data" / "initial_outreach_contacts.csv"
+DEFAULT_CONTACTS_PATH = ROOT / "data" / "sample_contacts.csv"
 DEFAULT_OUTREACH_LOG = ROOT / "data" / "outreach_log.csv"
 
 
@@ -198,7 +200,7 @@ def _build_drafts_from_contacts(
     limit: int | None = None,
     sample_report_base_url: str = f"{PUBLIC_SITE_URL}/reports",
     checkout_url: str = STRIPE_STARTER_URL,
-    contact_url: str = CONTACT_URL,
+    contact_url: str = CONTACT_EMAIL,
 ) -> list[DraftEmail]:
     contacts = filter_contacts(load_contacts(contacts_path), segment=segment, limit=limit)
     drafts = []
@@ -358,6 +360,18 @@ def main() -> int:
     resend_parser.add_argument("--segment", help="Optional segment slug filter")
     resend_parser.add_argument("--limit", type=int, help="Optional send limit")
 
+    inbox_parser = subparsers.add_parser("check-inbox", help="Fetch recent inbox headers over IMAP")
+    inbox_parser.add_argument("--username", required=True, help="IMAP username")
+    inbox_parser.add_argument("--password", help="IMAP password; prefer env AGENCY_RADAR_IMAP_PASSWORD or AGENCY_RADAR_SMTP_PASSWORD")
+    inbox_parser.add_argument("--mailbox", default="INBOX", help="Mailbox folder to inspect")
+    inbox_parser.add_argument("--since-days", type=int, default=2, help="Only return messages since N days ago")
+    inbox_parser.add_argument("--limit", type=int, default=20, help="Max messages to print")
+    inbox_parser.add_argument("--all", action="store_true", help="Include seen messages")
+
+    payments_parser = subparsers.add_parser("check-payments", help="Fetch recent Stripe checkout sessions")
+    payments_parser.add_argument("--api-key", help="Stripe secret key; prefer env STRIPE_SECRET_KEY")
+    payments_parser.add_argument("--limit", type=int, default=10, help="Number of recent sessions to fetch")
+
     args = parser.parse_args()
     if args.command == "list-profiles":
         return list_profiles()
@@ -442,6 +456,30 @@ def main() -> int:
         )
         for item in results:
             print(f"{item['status']}: {item['company_name']} <{item['email']}> | {item['detail']}")
+        return 0
+    if args.command == "check-inbox":
+        secret_name = "AGENCY_RADAR_IMAP_PASSWORD" if "AGENCY_RADAR_IMAP_PASSWORD" in os.environ else "AGENCY_RADAR_SMTP_PASSWORD"
+        password = args.password or read_secret(None, secret_name)
+        messages = fetch_inbox_messages(
+            username=args.username,
+            password=password,
+            mailbox=args.mailbox,
+            unseen_only=not args.all,
+            since_days=args.since_days,
+            limit=args.limit,
+        )
+        for message in messages:
+            print(f"{message.date_header} | {message.from_header} | {message.subject}")
+        return 0
+    if args.command == "check-payments":
+        events = fetch_recent_checkout_sessions(read_secret(args.api_key, "STRIPE_SECRET_KEY"), limit=args.limit)
+        for event in events:
+            amount = f"{(event.amount_total or 0) / 100:.2f} {event.currency}".strip()
+            print(
+                f"{event.created_at.isoformat()} | {event.payment_status}/{event.status} | "
+                f"{amount} | {event.customer_email or 'unknown'} | {event.mode} | "
+                f"{event.subscription_id or '-'} | {event.payment_link or '-'}"
+            )
         return 0
     return 1
 
