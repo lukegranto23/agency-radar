@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agency Radar | Procurement Intelligence for Narrow Federal Niches</title>
+  <style>
+    :root {
+      --bg: #0c1216;
+      --panel: #151d23;
+      --line: rgba(255,255,255,0.08);
+      --text: #edf0ea;
+      --muted: #b8c0b6;
+      --accent: #78d8b2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(120,216,178,0.18), transparent 24%),
+        linear-gradient(180deg, #11161b, var(--bg));
+    }
+    .shell { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+    .hero { padding: 4rem 0 2rem; }
+    .hero h1 { font-size: clamp(2.7rem, 7vw, 5rem); line-height: 0.96; margin: 0 0 1rem; }
+    .hero p, .card p, li { color: var(--muted); line-height: 1.7; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; padding-bottom: 3rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; padding-bottom: 3rem; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.2rem;
+    }
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1rem;
+      padding-bottom: 3rem;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.8rem 0;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #102018;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+    .cta.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .muted { color: var(--muted); }
+    @media (max-width: 900px) {
+      .grid, .grid-2, .pricing { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">Agency Radar</div>
+      <h1>Recurring procurement intelligence for buyers who care about timing, not dashboards.</h1>
+      <p>
+        Agency Radar turns open federal spending data into a narrow, sellable intelligence product:
+        top awards, top agencies, top incumbents, and expiring contracts for one niche at a time.
+      </p>
+      <div class="actions">
+        <a class="cta" href="sample-report.html">Open sample report</a>
+        <a class="cta secondary" href="catalog.html">Browse niche catalog</a>
+        <a class="cta secondary" href="pricing.html">View pricing</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Why this product</h2>
+        <p>It uses public data, automates well, and can be sold without waiting for a marketplace review.</p>
+      </article>
+      <article class="card">
+        <h2>Who buys it</h2>
+        <p>Federal contractors, subcontractors, capture consultants, and niche vendors who want signals, not noise.</p>
+      </article>
+      <article class="card">
+        <h2>How it compounds</h2>
+        <p>One good niche profile becomes a recurring report, then a catalog of vertical feeds with shared infrastructure.</p>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="card">
+        <h2>Live catalog</h2>
+        <p>The current catalog includes federal IT, cybersecurity, health IT, cloud/data, and construction-tech angles, each with a dedicated report page.</p>
+      </article>
+      <article class="card">
+        <h2>Sales-ready outputs</h2>
+        <p>Beyond the buyer-facing report, the system now generates ranked prospect sheets and outreach drafts from the same live award data.</p>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="card">
+        <h2>What buyers actually get</h2>
+        <ul>
+          <li>Top agencies spending in their niche right now</li>
+          <li>Incumbent primes and recipients to watch or team under</li>
+          <li>Expiring awards likely to matter for recompete planning</li>
+          <li>CSV exports for BD and capture workflows</li>
+          <li>A narrow weekly brief instead of a general bid portal</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Best first niche</h2>
+        <p>Federal IT services is the strongest starting wedge: big addressable spend, recurring buyer pain, and buyers who already understand capture intelligence.</p>
+        <p class="muted">Current sample: 200 tracked awards and 63 expiring within 180 days.</p>
+        <p><a class="cta secondary" href="catalog.html">Open the full catalog</a></p>
+      </article>
+    </section>
+
+    <section class="pricing">
+      <article class="card">
+        <h2>Starter</h2>
+        <div class="price">$99<span class="muted">/month</span></div>
+        <p>One weekly report for one niche profile.</p>
+      </article>
+      <article class="card">
+        <h2>Operator</h2>
+        <div class="price">$249<span class="muted">/month</span></div>
+        <p>Weekly report, CSV export, and one custom watchlist.</p>
+      </article>
+      <article class="card">
+        <h2>Capture</h2>
+        <div class="price">$499<span class="muted">/month</span></div>
+        <p>Two niches, custom filters, and delivery into buyer workflow.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

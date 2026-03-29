@@ -1,0 +1,34 @@
+{
+  "profile": {
+    "slug": "federal_cyber",
+    "name": "Federal Cybersecurity Radar",
+    "description": "A tighter watchlist on cybersecurity-adjacent federal spending for vendors chasing defensive, monitoring, and compliance-heavy work.",
+    "target_buyer": "cybersecurity firms, MSSPs, compliance consultants, and prime-sub support vendors",
+    "naics_codes": [
+      "541512",
+      "541519"
+    ],
+    "award_type_codes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "lookback_days": 365,
+    "expiring_within_days": 180,
+    "top_n_awards": 15,
+    "top_n_entities": 8,
+    "keywords": [
+      "zero trust",
+      "soc",
+      "siem",
+      "devsecops"
+    ]
+  },
+  "summary": {
+    "award_count": 200,
+    "total_award_amount": 80693323107.54,
+    "expiring_awards": 70,
+    "newly_seen_awards": 15
+  }
+}

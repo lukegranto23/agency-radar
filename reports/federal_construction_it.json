@@ -1,0 +1,36 @@
+{
+  "profile": {
+    "slug": "federal_construction_it",
+    "name": "Federal Construction Tech Radar",
+    "description": "Signals for firms sitting between federal construction, facilities, and systems integration spend.",
+    "target_buyer": "construction tech vendors, facilities integrators, and building systems contractors",
+    "naics_codes": [
+      "236220",
+      "238210",
+      "238220",
+      "541512"
+    ],
+    "award_type_codes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "lookback_days": 365,
+    "expiring_within_days": 180,
+    "top_n_awards": 15,
+    "top_n_entities": 8,
+    "keywords": [
+      "facilities",
+      "integration",
+      "building systems",
+      "energy"
+    ]
+  },
+  "summary": {
+    "award_count": 200,
+    "total_award_amount": 104402694351.18,
+    "expiring_awards": 48,
+    "newly_seen_awards": 15
+  }
+}

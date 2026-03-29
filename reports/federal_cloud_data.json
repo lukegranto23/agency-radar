@@ -1,0 +1,36 @@
+{
+  "profile": {
+    "slug": "federal_cloud_data",
+    "name": "Federal Cloud & Data Radar",
+    "description": "Signals for firms chasing federal cloud, platform, data, and managed-services opportunities.",
+    "target_buyer": "cloud consultancies, data-platform vendors, analytics integrators, and MSPs",
+    "naics_codes": [
+      "518210",
+      "541511",
+      "541512",
+      "541519"
+    ],
+    "award_type_codes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "lookback_days": 365,
+    "expiring_within_days": 180,
+    "top_n_awards": 15,
+    "top_n_entities": 8,
+    "keywords": [
+      "cloud",
+      "data platform",
+      "analytics",
+      "migration"
+    ]
+  },
+  "summary": {
+    "award_count": 200,
+    "total_award_amount": 86077152879.13,
+    "expiring_awards": 65,
+    "newly_seen_awards": 15
+  }
+}

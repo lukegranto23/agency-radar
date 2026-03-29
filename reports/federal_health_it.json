@@ -1,0 +1,36 @@
+{
+  "profile": {
+    "slug": "federal_health_it",
+    "name": "Federal Health IT Radar",
+    "description": "A recurring brief for vendors and consultants tracking federal health systems, modernization, and digital health spend.",
+    "target_buyer": "health IT contractors, digital health integrators, proposal teams, and VA/HHS-focused consultants",
+    "naics_codes": [
+      "541511",
+      "541512",
+      "541519",
+      "621511"
+    ],
+    "award_type_codes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "lookback_days": 365,
+    "expiring_within_days": 180,
+    "top_n_awards": 15,
+    "top_n_entities": 8,
+    "keywords": [
+      "ehr",
+      "digital health",
+      "clinical systems",
+      "modernization"
+    ]
+  },
+  "summary": {
+    "award_count": 200,
+    "total_award_amount": 84842799258.09,
+    "expiring_awards": 64,
+    "newly_seen_awards": 15
+  }
+}

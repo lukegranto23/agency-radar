@@ -1,0 +1,168 @@
+[
+  {
+    "company_name": "ACCENTURE FEDERAL SERVICES LLC",
+    "score": 171,
+    "total_award_amount": 6218696540.84,
+    "award_count": 13,
+    "expiring_award_count": 6,
+    "expiring_award_amount": 2168498199.91,
+    "recent_award_count": 1,
+    "top_agencies": [
+      "Department of Veterans Affairs",
+      "Department of Health and Human Services",
+      "Department of Defense"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "13 tracked awards totaling $6,218,696,541; 6 expiring inside 180 days; 1 recent high-value wins in the latest window; active with Department of Veterans Affairs, Department of Health and Human Services",
+    "sample_award_id": "91003119F0003"
+  },
+  {
+    "company_name": "GENERAL DYNAMICS INFORMATION TECHNOLOGY, INC.",
+    "score": 153,
+    "total_award_amount": 5694080531.959999,
+    "award_count": 16,
+    "expiring_award_count": 5,
+    "expiring_award_amount": 1524329442.67,
+    "recent_award_count": 1,
+    "top_agencies": [
+      "General Services Administration",
+      "Department of Health and Human Services",
+      "Department of Defense"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "16 tracked awards totaling $5,694,080,532; 5 expiring inside 180 days; 1 recent high-value wins in the latest window; active with General Services Administration, Department of Health and Human Services",
+    "sample_award_id": "75FCMC20F0080"
+  },
+  {
+    "company_name": "BOOZ ALLEN HAMILTON INC",
+    "score": 135,
+    "total_award_amount": 10077033788.62,
+    "award_count": 16,
+    "expiring_award_count": 4,
+    "expiring_award_amount": 2559360194.85,
+    "recent_award_count": 0,
+    "top_agencies": [
+      "General Services Administration",
+      "Department of Veterans Affairs",
+      "National Science Foundation"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "16 tracked awards totaling $10,077,033,789; 4 expiring inside 180 days; active with General Services Administration, Department of Veterans Affairs",
+    "sample_award_id": "47QFCA21F0018"
+  },
+  {
+    "company_name": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION",
+    "score": 129,
+    "total_award_amount": 5614310717.359999,
+    "award_count": 11,
+    "expiring_award_count": 4,
+    "expiring_award_amount": 2239858750.08,
+    "recent_award_count": 0,
+    "top_agencies": [
+      "Department of Defense",
+      "General Services Administration",
+      "Department of State"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "11 tracked awards totaling $5,614,310,717; 4 expiring inside 180 days; active with Department of Defense, General Services Administration",
+    "sample_award_id": "47QFCA21F0001"
+  },
+  {
+    "company_name": "ORACLE HEALTH GOVERNMENT SERVICES, INC.",
+    "score": 110,
+    "total_award_amount": 4601243271.75,
+    "award_count": 8,
+    "expiring_award_count": 3,
+    "expiring_award_amount": 2740133806.5299997,
+    "recent_award_count": 1,
+    "top_agencies": [
+      "Department of Veterans Affairs"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "8 tracked awards totaling $4,601,243,272; 3 expiring inside 180 days; 1 recent high-value wins in the latest window; active with Department of Veterans Affairs",
+    "sample_award_id": "36C10B18N0003"
+  },
+  {
+    "company_name": "SALIENT CRGT, INC.",
+    "score": 106,
+    "total_award_amount": 1596600973.88,
+    "award_count": 4,
+    "expiring_award_count": 3,
+    "expiring_award_amount": 1140231316.2,
+    "recent_award_count": 0,
+    "top_agencies": [
+      "General Services Administration"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "4 tracked awards totaling $1,596,600,974; 3 expiring inside 180 days; active with General Services Administration",
+    "sample_award_id": "47QFCA20F0043"
+  },
+  {
+    "company_name": "LEIDOS, INC.",
+    "score": 102,
+    "total_award_amount": 6093486661.49,
+    "award_count": 12,
+    "expiring_award_count": 2,
+    "expiring_award_amount": 481789892.8,
+    "recent_award_count": 2,
+    "top_agencies": [
+      "Department of Defense",
+      "Department of Transportation",
+      "General Services Administration"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "12 tracked awards totaling $6,093,486,661; 2 expiring inside 180 days; 2 recent high-value wins in the latest window; active with Department of Defense, Department of Transportation",
+    "sample_award_id": "28321322FDS030130"
+  },
+  {
+    "company_name": "PERATON ENTERPRISE SOLUTIONS LLC",
+    "score": 100,
+    "total_award_amount": 2313967419.83,
+    "award_count": 6,
+    "expiring_award_count": 2,
+    "expiring_award_amount": 840019745.77,
+    "recent_award_count": 0,
+    "top_agencies": [
+      "General Services Administration",
+      "Department of Education",
+      "Department of Labor"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "6 tracked awards totaling $2,313,967,420; 2 expiring inside 180 days; active with General Services Administration, Department of Education",
+    "sample_award_id": "47QFCA20F0015"
+  },
+  {
+    "company_name": "DELOITTE CONSULTING LLP",
+    "score": 100,
+    "total_award_amount": 2216313148.6400003,
+    "award_count": 6,
+    "expiring_award_count": 2,
+    "expiring_award_amount": 579427383.1,
+    "recent_award_count": 1,
+    "top_agencies": [
+      "General Services Administration",
+      "Department of Health and Human Services",
+      "Department of the Treasury"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "6 tracked awards totaling $2,216,313,149; 2 expiring inside 180 days; 1 recent high-value wins in the latest window; active with General Services Administration, Department of Health and Human Services",
+    "sample_award_id": "HHSN31600002"
+  },
+  {
+    "company_name": "CACI NSS, LLC",
+    "score": 99,
+    "total_award_amount": 620916497.63,
+    "award_count": 3,
+    "expiring_award_count": 2,
+    "expiring_award_amount": 405571785.01,
+    "recent_award_count": 0,
+    "top_agencies": [
+      "Department of Homeland Security",
+      "Department of Veterans Affairs",
+      "Department of Defense"
+    ],
+    "target_role": "BD lead or federal growth lead",
+    "why_now": "3 tracked awards totaling $620,916,498; 2 expiring inside 180 days; active with Department of Homeland Security, Department of Veterans Affairs",
+    "sample_award_id": "70RTAC21FC0000006"
+  }
+]

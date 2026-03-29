@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agency Radar Pricing</title>
+  <style>
+    :root {
+      --bg: #0c1216;
+      --panel: #151d23;
+      --line: rgba(255,255,255,0.08);
+      --text: #edf0ea;
+      --muted: #b8c0b6;
+      --accent: #78d8b2;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; color: var(--text); background: linear-gradient(180deg, #11161b, var(--bg)); }
+    .shell { width: min(1100px, calc(100% - 2rem)); margin: 0 auto; padding: 3rem 0; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 1.2rem; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 0.96; margin: 0 0 1rem; }
+    p, li { color: var(--muted); line-height: 1.7; }
+    .price { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
+    .btn { display: inline-block; padding: 0.95rem 1.2rem; border-radius: 999px; background: var(--accent); color: #102018; text-decoration: none; font-weight: 700; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <h1>Agency Radar pricing</h1>
+    <p>This is positioned as a narrow recurring intelligence brief, not a generic dashboard subscription.</p>
+    <p><a class="btn" href="catalog.html">Browse the niche catalog</a></p>
+    <section class="grid">
+      <article class="card">
+        <h2>Starter</h2>
+        <div class="price">$99/month</div>
+        <ul>
+          <li>One niche</li>
+          <li>One weekly report</li>
+          <li>HTML + Markdown delivery</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Operator</h2>
+        <div class="price">$249/month</div>
+        <ul>
+          <li>One niche + custom watchlist</li>
+          <li>CSV export</li>
+          <li>Priority updates</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Capture</h2>
+        <div class="price">$499/month</div>
+        <ul>
+          <li>Two niches</li>
+          <li>Custom filters</li>
+          <li>Workflow delivery integration</li>
+        </ul>
+      </article>
+    </section>
+    <p><a class="btn" href="sample-report.html">Open the sample report</a></p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agency Radar Catalog</title>
+  <style>
+    :root {
+      --bg: #0d1216;
+      --panel: #151d22;
+      --line: rgba(255,255,255,0.08);
+      --text: #edf1ea;
+      --muted: #b6beb5;
+      --accent: #7ad7b3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(122,215,179,0.18), transparent 22%),
+        linear-gradient(180deg, #10171c, var(--bg));
+    }
+    .shell { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: 3rem 0; }
+    .hero { padding-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 0.95; margin: 0 0 1rem; }
+    .hero p, .card p { color: var(--muted); line-height: 1.7; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 1.2rem; }
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+    .stats div { background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 16px; padding: 0.9rem; }
+    .stats strong { display: block; margin-top: 0.35rem; }
+    .label { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cta { display: inline-block; padding: 0.85rem 1.05rem; border-radius: 999px; background: var(--accent); color: #102018; font-weight: 700; text-decoration: none; }
+    @media (max-width: 900px) {
+      .grid, .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">Agency Radar catalog</div>
+      <h1>Sellable procurement briefs across multiple federal niches.</h1>
+      <p>Each report is generated from live USAspending data and packaged as a recurring brief rather than a dashboard subscription. This page is meant to make the product legible to buyers fast.</p>
+    </section>
+    <section class="grid">
+      <article class='card'><div class='eyebrow'>federal construction it</div><h2>Federal Construction Tech Radar</h2><p>Signals for firms sitting between federal construction, facilities, and systems integration spend.</p><p><strong>Target buyer:</strong> construction tech vendors, facilities integrators, and building systems contractors</p><div class='stats'><div><span class='label'>Awards</span><strong>200</strong></div><div><span class='label'>Spend</span><strong>$104,402,694,351</strong></div><div><span class='label'>Expiring</span><strong>48</strong></div></div><a class='cta' href='reports/federal_construction_it.html'>Open report</a></article><article class='card'><div class='eyebrow'>federal it</div><h2>Federal IT Services Radar</h2><p>Recurring procurement intelligence for small IT, software, cloud, and managed-services vendors selling into the federal market.</p><p><strong>Target buyer:</strong> small federal contractors, subcontractors, capture consultants, and MSPs</p><div class='stats'><div><span class='label'>Awards</span><strong>200</strong></div><div><span class='label'>Spend</span><strong>$87,066,126,287</strong></div><div><span class='label'>Expiring</span><strong>63</strong></div></div><a class='cta' href='reports/federal_it.html'>Open report</a></article><article class='card'><div class='eyebrow'>federal cloud data</div><h2>Federal Cloud &amp; Data Radar</h2><p>Signals for firms chasing federal cloud, platform, data, and managed-services opportunities.</p><p><strong>Target buyer:</strong> cloud consultancies, data-platform vendors, analytics integrators, and MSPs</p><div class='stats'><div><span class='label'>Awards</span><strong>200</strong></div><div><span class='label'>Spend</span><strong>$86,077,152,879</strong></div><div><span class='label'>Expiring</span><strong>65</strong></div></div><a class='cta' href='reports/federal_cloud_data.html'>Open report</a></article><article class='card'><div class='eyebrow'>federal health it</div><h2>Federal Health IT Radar</h2><p>A recurring brief for vendors and consultants tracking federal health systems, modernization, and digital health spend.</p><p><strong>Target buyer:</strong> health IT contractors, digital health integrators, proposal teams, and VA/HHS-focused consultants</p><div class='stats'><div><span class='label'>Awards</span><strong>200</strong></div><div><span class='label'>Spend</span><strong>$84,842,799,258</strong></div><div><span class='label'>Expiring</span><strong>64</strong></div></div><a class='cta' href='reports/federal_health_it.html'>Open report</a></article><article class='card'><div class='eyebrow'>federal cyber</div><h2>Federal Cybersecurity Radar</h2><p>A tighter watchlist on cybersecurity-adjacent federal spending for vendors chasing defensive, monitoring, and compliance-heavy work.</p><p><strong>Target buyer:</strong> cybersecurity firms, MSSPs, compliance consultants, and prime-sub support vendors</p><div class='stats'><div><span class='label'>Awards</span><strong>200</strong></div><div><span class='label'>Spend</span><strong>$80,693,323,108</strong></div><div><span class='label'>Expiring</span><strong>70</strong></div></div><a class='cta' href='reports/federal_cyber.html'>Open report</a></article>
+    </section>
+  </main>
+</body>
+</html>

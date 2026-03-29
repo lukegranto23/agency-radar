@@ -1,0 +1,14 @@
+[project]
+name = "agency-radar"
+version = "0.1.0"
+description = "Recurring procurement-intelligence report generator for narrow federal market niches."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Codex" }
+]
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

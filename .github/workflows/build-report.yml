@@ -1,0 +1,24 @@
+name: Build Agency Radar Reports
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 11 * * 1-5"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build federal IT report
+        run: |
+          PYTHONPATH=src python3 -m agency_radar.cli build --profile federal_it
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: agency-radar-reports
+          path: reports/
+

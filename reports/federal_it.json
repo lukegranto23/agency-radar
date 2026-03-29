@@ -1,0 +1,36 @@
+{
+  "profile": {
+    "slug": "federal_it",
+    "name": "Federal IT Services Radar",
+    "description": "Recurring procurement intelligence for small IT, software, cloud, and managed-services vendors selling into the federal market.",
+    "target_buyer": "small federal contractors, subcontractors, capture consultants, and MSPs",
+    "naics_codes": [
+      "541511",
+      "541512",
+      "541513",
+      "541519"
+    ],
+    "award_type_codes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "lookback_days": 365,
+    "expiring_within_days": 180,
+    "top_n_awards": 15,
+    "top_n_entities": 8,
+    "keywords": [
+      "cloud",
+      "software",
+      "cyber",
+      "managed services"
+    ]
+  },
+  "summary": {
+    "award_count": 200,
+    "total_award_amount": 87066126286.8,
+    "expiring_awards": 63,
+    "newly_seen_awards": 0
+  }
+}

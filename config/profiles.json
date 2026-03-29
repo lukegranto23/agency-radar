@@ -1,0 +1,64 @@
+{
+  "profiles": {
+    "federal_it": {
+      "name": "Federal IT Services Radar",
+      "description": "Recurring procurement intelligence for small IT, software, cloud, and managed-services vendors selling into the federal market.",
+      "target_buyer": "small federal contractors, subcontractors, capture consultants, and MSPs",
+      "naics_codes": ["541511", "541512", "541513", "541519"],
+      "award_type_codes": ["A", "B", "C", "D"],
+      "lookback_days": 365,
+      "expiring_within_days": 180,
+      "top_n_awards": 15,
+      "top_n_entities": 8,
+      "keywords": ["cloud", "software", "cyber", "managed services"]
+    },
+    "federal_cyber": {
+      "name": "Federal Cybersecurity Radar",
+      "description": "A tighter watchlist on cybersecurity-adjacent federal spending for vendors chasing defensive, monitoring, and compliance-heavy work.",
+      "target_buyer": "cybersecurity firms, MSSPs, compliance consultants, and prime-sub support vendors",
+      "naics_codes": ["541512", "541519"],
+      "award_type_codes": ["A", "B", "C", "D"],
+      "lookback_days": 365,
+      "expiring_within_days": 180,
+      "top_n_awards": 15,
+      "top_n_entities": 8,
+      "keywords": ["zero trust", "soc", "siem", "devsecops"]
+    },
+    "federal_health_it": {
+      "name": "Federal Health IT Radar",
+      "description": "A recurring brief for vendors and consultants tracking federal health systems, modernization, and digital health spend.",
+      "target_buyer": "health IT contractors, digital health integrators, proposal teams, and VA/HHS-focused consultants",
+      "naics_codes": ["541511", "541512", "541519", "621511"],
+      "award_type_codes": ["A", "B", "C", "D"],
+      "lookback_days": 365,
+      "expiring_within_days": 180,
+      "top_n_awards": 15,
+      "top_n_entities": 8,
+      "keywords": ["ehr", "digital health", "clinical systems", "modernization"]
+    },
+    "federal_cloud_data": {
+      "name": "Federal Cloud & Data Radar",
+      "description": "Signals for firms chasing federal cloud, platform, data, and managed-services opportunities.",
+      "target_buyer": "cloud consultancies, data-platform vendors, analytics integrators, and MSPs",
+      "naics_codes": ["518210", "541511", "541512", "541519"],
+      "award_type_codes": ["A", "B", "C", "D"],
+      "lookback_days": 365,
+      "expiring_within_days": 180,
+      "top_n_awards": 15,
+      "top_n_entities": 8,
+      "keywords": ["cloud", "data platform", "analytics", "migration"]
+    },
+    "federal_construction_it": {
+      "name": "Federal Construction Tech Radar",
+      "description": "Signals for firms sitting between federal construction, facilities, and systems integration spend.",
+      "target_buyer": "construction tech vendors, facilities integrators, and building systems contractors",
+      "naics_codes": ["236220", "238210", "238220", "541512"],
+      "award_type_codes": ["A", "B", "C", "D"],
+      "lookback_days": 365,
+      "expiring_within_days": 180,
+      "top_n_awards": 15,
+      "top_n_entities": 8,
+      "keywords": ["facilities", "integration", "building systems", "energy"]
+    }
+  }
+}
